@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Happy Birthday zah</title>
+<meta charset="UTF-8">
+    <meta name="description" content="Happy Birthday Xola">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Birthday, Happy">
+    
+    <!-- Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="favicon.ico">
+    <meta property="og:description" content="Wish you a very Happy Birthday">
+    
+    <!-- Mobile Optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
+    
+    <!-- Load jQuery (HARUS sebelum script yang menggunakannya) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div class="envelope-wrapper">
+        <div id="envelope" class="close">
+            <div class="front flap"></div>
+            <div class="front pocket"></div>
+            <div class="letter">
+                <div class="words line1">Hai </div>
+                <div class="words line2">Apa kabar zizah?</div>
+                <div class="words line3">Semoga Baik-baik aja sih</div>
+                <div class="words line4"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="reset">
+        <button id="open-amplop">Open</button>
+    </div>
+    <!-- JavaScript -->
+    <script>
+        var $envelope = $('#envelope');
+var $btnOpen = $("#open-amplop");
+var $card = $('#card'); // Pastikan elemen card sudah ada di HTML
+
+$btnOpen.on('click', function() {
+    // Envelope animation
+    $envelope.removeClass('close').addClass('open');
+
+    // Fade out envelope and show card
+    setTimeout(function() {
+        $envelope.css("opacity", "0");  // Make envelope disappear
+        setTimeout(function() {
+            $card.fadeIn();  // Show card after 4 seconds
+            // Redirect to card.php after the envelope fades out
+            window.location.href = "card.php"; // Redirect to card.php
+        }, 500);  // Delay for the envelope fading out
+    }, 5000); // 4 seconds after opening envelope
+
+    // Remove Open button once envelope opens
+    $btnOpen.hide();
+});
+document.addEventListener("DOMContentLoaded", function () {
+    // Ambil waktu saat ini berdasarkan zona waktu Jakarta
+    let now = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" });
+    let currentDate = new Date(now);
+
+    // Tentukan tanggal yang diizinkan (1 Februari 2025)
+    let allowedDate = new Date("2025-02-01T00:00:00+07:00"); // Menggunakan zona waktu Jakarta (+07:00)
+
+    // Cek apakah tanggal saat ini sebelum 1 Februari 2025
+    if (
+        currentDate.getFullYear() < allowedDate.getFullYear() ||
+        (currentDate.getFullYear() === allowedDate.getFullYear() && currentDate.getMonth() < allowedDate.getMonth()) ||
+        (currentDate.getFullYear() === allowedDate.getFullYear() && currentDate.getMonth() === allowedDate.getMonth() && currentDate.getDate() < allowedDate.getDate())
+    ) {
+        document.body.innerHTML = "<h1>Belum waktunya tunggu jam 00:00 !</h1>";
+    }
+});
+
+    </script>
+</body>
+</html>
